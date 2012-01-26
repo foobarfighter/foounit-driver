@@ -7,7 +7,8 @@ foounit.mount('fixtures', __dirname + '/fixtures');
 /**
  * Add test files to your suite
  */
-foounit.getSuite().addFile(':spec/profile-spec');
+foounit.getSuite().addFile(':spec/co-context-spec');
+foounit.getSuite().addFile(':spec/keywords-spec');
 //foounit.getSuite().addFile(':spec/page-spec');
 //foounit.getSuite().addFile(':spec/page-element-spec');
 //foounit.getSuite().addFile(':spec/concurrent-spec');

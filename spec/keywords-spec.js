@@ -2,7 +2,7 @@ foounit.require(':spec/spec-helper');
 
 var driver = foounit.require(':lib/driver');
 
-describe('Profile', function (){
+describe('keywords', function (){
   var started;
 
   before(function (){
@@ -57,4 +57,10 @@ describe('Profile', function (){
       });
     });
   });
+
+  //describe('concurrently', function (){
+  //  it('creates a separate workqueue for each profile', function (){
+  //    
+  //  });
+  //});
 });
