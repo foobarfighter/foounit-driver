@@ -27,10 +27,10 @@ driver.configure({
 , browserPool: 0                      // creates a new browser every time
 
 /**
- * Restart any browser that is using more than N memory after a test is finished
- * running.
+ * Max memory usage per browser instance.  A browser is restarted if it is using
+ * more memory than after a test.
  */
-, restartOnMemoryOver: 1024*1000*100  // 0 means never restart
+, maxMemoryMB: 200 // 0 means never restart
 
 /**
  * Stop running tests if there is a failure
