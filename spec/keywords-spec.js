@@ -5,6 +5,11 @@ var driver = foounit.require(':lib/driver');
 describe('keywords', function (){
   var started;
 
+  var getCurrentBlockQueue = function (){
+    return foounit.getBuildContext().getCurrentExample()
+      .getCurrentBlockQueue();
+  }
+
   before(function (){
     started = mock(function (){});
   });
@@ -19,13 +24,10 @@ describe('keywords', function (){
     });
 
     it('loads a profile fixture and adds a block to the work queue', function (){
-      var queue = foounit.getBuildContext().getCurrentExample()
-        .getCurrentBlockQueue();
-
+      var queue = getCurrentBlockQueue();
       expect(queue.size()).to(be, 0);
 
       var bob = as('bob', started);
-
       expect(queue.size()).to(beGt, 0);
       expect(bob.permalink).to(be, 'b');
     });
@@ -33,7 +35,7 @@ describe('keywords', function (){
     it('opens a browser', function (){
       var bob = as('bob', started);
 
-      waitFor(function (){
+      run(function (){
         expect(bob.getBrowser()).toNot(beUndefined);
       });
     });
@@ -52,15 +54,39 @@ describe('keywords', function (){
 
       killProfiles();
 
-      waitFor(function (){
+      run(function (){
         expect(driver.getProfiles().length).to(be, 0);
       });
     });
   });
 
-  //describe('concurrently', function (){
-  //  it('creates a separate workqueue for each profile', function (){
-  //    
-  //  });
-  //});
+  describe('concurrently', function (){
+    it('creates a separate profile and queue', function (){
+      var bob, bill, jane;
+
+      // 1 item added to the queue
+      concurrently()
+        .as('bob', function (_bob){ bob = _bob; })
+        .as('bill', function (_bill){ bill = _bill; });
+
+      run(function (){
+        var profiles = driver.getProfiles();
+        expect(profiles).to(include, bob);
+        expect(profiles).to(include, bill);
+        expect(profiles).toNot(include, jane);
+      });
+
+      // counts as 2 items added to the main work queue
+      as('jane', function (_jane){ jane = _jane; });
+
+      run(function (){
+        var profiles = driver.getProfiles();
+        expect(profiles).to(include, jane);
+      });
+
+      // this is NOT part of the async excecution flow
+      expect(getCurrentBlockQueue().size()).to(be, 5);
+      expect(driver.getProfiles().length).to(be, 3);
+    });
+  });
 });

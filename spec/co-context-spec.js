@@ -104,17 +104,36 @@ describe('CoContext', function (){
           expect(passQueue.onComplete).to(haveBeenCalled);
           expect(passQueue.onTaskComplete).toNot(haveBeenCalled, 3);
 
-          // The mainQueue should have failed
+          // the mainQueue should have failed
           expect(mainQueue.onTaskFailure).to(haveBeenCalled, once);
           expect(mainQueue.onTaskComplete).toNot(haveBeenCalled);
         });
       });
     });
+
+    xdescribe('when more than one subqueue fails', function (){
+      it('only fails the concurrent block once', function (){
+      });
+    });
   });
 
-  xdescribe('as', function (){
+  describe('as', function (){
+    after(function (){
+      killProfiles();
+    });
+
     it('creates a profile in a separate work queue', function (){
-      
+      var bob, jane;
+
+      var context = new CoContext(new foounit.WorkQueue());
+      context.as('bob', function (_bob){ bob = _bob; });
+      context.as('jane', function (_jane){ jane = _jane; });
+
+      waitFor(function (){
+        expect(context.getProfiles().length).to(be, 2);
+        expect(context.getProfiles()).to(include, bob);
+        expect(context.getProfiles()).to(include, jane);
+      });
     });
   });
 });
