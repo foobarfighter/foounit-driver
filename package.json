@@ -1,13 +1,17 @@
-{ "name"        : "foounit-driver"
-, "description" : "Tools for running selenium tests in foounit"
-, "tags"        : ["foounit", "integration testing"]
-, "repository"  : {"type": "git", "url": "http://github.com/foobarfighter/foounit-driver.git"}
-, "author"      : "Bob Remeika"
-, "version"     : "0.0.1"
-, "main"        : "./lib/driver.js"
-, "dependencies": {
-    "foounit"   : "=0.1.2",
-    "jellyfish" : "=0.0.11",
-    "underscore" : ""
+{ "name"            : "foounit-driver"
+, "description"     : "Tools for running selenium tests in foounit"
+, "tags"            : ["foounit", "integration testing"]
+, "repository"      : {"type": "git", "url": "http://github.com/foobarfighter/foounit-driver.git"}
+, "author"          : "Bob Remeika"
+, "version"         : "0.0.1"
+, "main"            : "./lib/driver.js"
+, "dependencies"    : {
+    "foounit"       : "=0.1.2"
+  , "wd"            : "=0.0.9"
+  , "underscore"    : ""
+  , "inflection"    : "=0.0.1"
+  }
+, "devDependencies" : {
+    "connect"       : ""
   }
 }
