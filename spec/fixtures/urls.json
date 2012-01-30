@@ -2,7 +2,7 @@
   "baseUri": "http://localhost:5050"
 
 , "pages": {
-    "Login":       { "selector": "body .foo-login",        "url": "/login.html" }
+    "Login":       { "selector": "body.foo-login",        "url": "/login.html" }
   , "Profile":     { "selector": "body .foo-profile",      "url": "/profile.html" }
   , "EditProfile": { "selector": "body .foo-edit-profile", "url": "/edit_profile.html" }
   }
