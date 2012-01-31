@@ -24,9 +24,4 @@ describe('local integration test', function (){
     });
   });
 
-  it('does something', function (){
-    waitFor(function (){
-      throw new Error('test');
-    });
-  });
 });
