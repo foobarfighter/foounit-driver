@@ -15,6 +15,11 @@ driver.configure({
   browser: process.env.BROWSER || 'Chrome'
 
 /**
+ * Base URI that the test suite will be operating on
+ */
+, baseUri: 'http://localhost:5050'
+
+/**
  * Path to look for fixture files.  Used by fixture.load.  The path can contain
  * foounit mounts.
  */
