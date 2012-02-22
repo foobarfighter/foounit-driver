@@ -73,7 +73,6 @@ before(function (){
 
   waitFor(function (){
     expect(listening).to(haveBeenCalled);
-    //console.log('>> server started');
   });
 });
 
@@ -85,6 +84,5 @@ after(function (){
 
   waitFor(function (){
     expect(closed).to(haveBeenCalled);
-    //console.log('>> server stopped');
   });
 });
